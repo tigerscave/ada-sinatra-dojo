@@ -1,0 +1,23 @@
+<h1>My BBS</h1>
+<p><%= hoge %></p>
+<ul>
+  <% @comments.each do |comment| %>
+    <li>
+      <span>
+        <%= comment[:id] %>
+      </span>
+      <span>
+        <%= escape_html(comment[:body]) %>
+      </span>
+      <button
+        class="delete"
+        data="<%= comment[:id] %>"
+        token="<%= csrf_token %>">×</button>
+    </li>
+  <% end %>
+</ul>
+<form action="/create" method="post">
+  <%= csrf_tag %>
+  <input type="text" name="body">
+  <input type="submit" value="Add comment">
+</form>
